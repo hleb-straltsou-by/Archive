@@ -1,7 +1,5 @@
 package com.gv.archive.communication.interfaces;
 
-import java.io.Serializable;
-
 public interface Request {
 
     String getRequestType();
