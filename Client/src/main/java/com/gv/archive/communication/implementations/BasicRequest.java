@@ -11,11 +11,7 @@ public class BasicRequest implements Request, Serializable{
 
     private String xmlParser;
 
-    public BasicRequest(String body) {
-        this.body = body;
-    }
-
-    public BasicRequest(String type, String body, String xmlParser) {
+    public BasicRequest(String body, String xmlParser) {
         this.type = type;
         this.body = body;
         this.xmlParser = xmlParser;
