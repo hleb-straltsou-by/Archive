@@ -9,13 +9,12 @@ public class BasicRequest implements Request, Serializable{
 
     private String body;
 
-    public BasicRequest(String body) {
-        this.body = body;
-    }
+    private String xmlParser;
 
-    public BasicRequest(String type, String body) {
+    public BasicRequest(String body, String xmlParser) {
         this.type = type;
         this.body = body;
+        this.xmlParser = xmlParser;
     }
 
     @Override
@@ -29,6 +28,11 @@ public class BasicRequest implements Request, Serializable{
     }
 
     @Override
+    public String getXMLParser(){
+        return xmlParser;
+    }
+
+    @Override
     public void setRequestType(String type) {
         this.type = type;
     }
@@ -37,4 +41,10 @@ public class BasicRequest implements Request, Serializable{
     public void setRequestBody(String body) {
         this.body = body;
     }
+
+    @Override
+    public void setXMLParser(String xmlParser){
+        this.xmlParser = xmlParser;
+    }
 }
+

@@ -29,7 +29,7 @@ public class ServerController {
             AppLogger.getLogger().info("Trying to start server.");
             serverSocketChannel = ServerSocketChannel.open();
             serverSocketChannel.configureBlocking(true);
-            int port = new Integer(RESOURCE_BUNDLE.getString(SERVER_PORT));
+            int port = Integer.parseInt(RESOURCE_BUNDLE.getString(SERVER_PORT));
             serverSocketChannel.socket().bind(new InetSocketAddress(port));
             AppLogger.getLogger().info("Server started.");
             while(true){

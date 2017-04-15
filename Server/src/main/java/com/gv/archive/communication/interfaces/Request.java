@@ -6,7 +6,11 @@ public interface Request {
 
     String getRequestBody();
 
-    void setRequestType(String type);
+    String getXMLParser();
+
+    void setRequestType(String requestType);
 
     void setRequestBody(String body);
+
+    void setXMLParser(String xmlParser);
 }
