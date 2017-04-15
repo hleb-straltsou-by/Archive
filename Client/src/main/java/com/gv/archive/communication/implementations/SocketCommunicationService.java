@@ -20,30 +20,7 @@ public class SocketCommunicationService implements CommunicationService{
     /** name of property in resource bundle that corresponds to server's ip */
     private static final String SERVER_IP = "server.ip";
 
-    private SocketChannel socketChannel;
-
-    private ObjectInputStream objectInputStream;
-
-    private ObjectOutputStream objectOutputStream;
-
     public SocketCommunicationService(){}
-
-    @Override
-    public void init() {
-        try {
-            AppLogger.getLogger().info("Initialization of connection with server through sockets.");
-            socketChannel = SocketChannel.open();
-            socketChannel.configureBlocking(true);
-            int serverPort = Integer.parseInt(RESOURCE_BUNDLE.getString(SERVER_PORT));
-            if (socketChannel.connect(new InetSocketAddress(RESOURCE_BUNDLE.getString(SERVER_IP), serverPort))) {
-                objectInputStream = new ObjectInputStream(socketChannel.socket().getInputStream());
-                objectOutputStream = new ObjectOutputStream(socketChannel.socket().getOutputStream());
-            }
-            AppLogger.getLogger().info("Initialization was successful. Input and output streams are initialized.");
-        } catch (Exception e){
-            AppLogger.getLogger().error(e);
-        }
-    }
 
     @Override
     public Response doGet(Request request) {
@@ -92,8 +69,23 @@ public class SocketCommunicationService implements CommunicationService{
     private Response sendRequest(Request request){
         Response response = null;
         try{
-            objectOutputStream.writeObject(request);
-            response = (Response)objectInputStream.readObject();
+            AppLogger.getLogger().info("Initialization of socket channel.");
+            SocketChannel socketChannel = SocketChannel.open();
+            socketChannel.configureBlocking(true);
+            int serverPort = Integer.parseInt(RESOURCE_BUNDLE.getString(SERVER_PORT));
+            if (socketChannel.connect(new InetSocketAddress("localhost", serverPort))) {
+
+                ObjectOutputStream outputStream = new ObjectOutputStream(socketChannel.socket().getOutputStream());
+                outputStream.writeObject(request);
+
+                ObjectInputStream inputStream = new ObjectInputStream(socketChannel.socket().getInputStream());
+                response = (Response)inputStream.readObject();
+                inputStream.close();
+                outputStream.close();
+            }
+            else {
+                AppLogger.getLogger().error("Error! Cannot connect to the server.");
+            }
         } catch (Exception e){
             AppLogger.getLogger().error(e);
         } finally {
