@@ -7,6 +7,8 @@ public class BasicResponse implements Response, Serializable{
 
     private String body;
 
+    public BasicResponse(){}
+
     public BasicResponse(String body){
         this.body = body;
     }
