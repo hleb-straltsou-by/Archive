@@ -25,6 +25,11 @@ public enum RequestStrategyEnum {
             strategy = new DeleteRequestStrategy();
         }
     },
+    LOGIN{
+        {
+            strategy = new LoginRequestStrategy();
+        }
+    },
     EMPTY{
         {
             strategy = new EmptyRequestStrategy();

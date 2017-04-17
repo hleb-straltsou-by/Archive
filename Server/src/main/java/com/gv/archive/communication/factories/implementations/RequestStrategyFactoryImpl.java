@@ -6,11 +6,11 @@ import com.gv.archive.communication.interfaces.Request;
 import com.gv.archive.communication.strategies.interfaces.RequestStrategy;
 import com.gv.archive.logging.AppLogger;
 
-public class RequestStrategyFactoryBasic implements RequestStrategyFactory {
+public class RequestStrategyFactoryImpl implements RequestStrategyFactory {
 
     private RequestStrategyEnum strategyEnum;
 
-    RequestStrategyFactoryBasic(){}
+    public RequestStrategyFactoryImpl(){}
 
     @Override
     public RequestStrategy defineRequestStrategy(Request request) {
