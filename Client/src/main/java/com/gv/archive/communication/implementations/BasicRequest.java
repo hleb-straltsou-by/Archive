@@ -3,7 +3,7 @@ package com.gv.archive.communication.implementations;
 import com.gv.archive.communication.interfaces.Request;
 import java.io.Serializable;
 
-public class BasicRequest implements Request, Serializable{
+public class BasicRequest implements Request, Serializable {
 
     private String type;
 
@@ -28,7 +28,7 @@ public class BasicRequest implements Request, Serializable{
     }
 
     @Override
-    public String getXMLParser(){
+    public String getXMLParser() {
         return xmlParser;
     }
 
@@ -43,7 +43,7 @@ public class BasicRequest implements Request, Serializable{
     }
 
     @Override
-    public void setXMLParser(String xmlParser){
+    public void setXMLParser(String xmlParser) {
         this.xmlParser = xmlParser;
     }
 }

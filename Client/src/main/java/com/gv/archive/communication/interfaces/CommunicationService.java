@@ -9,4 +9,6 @@ public interface CommunicationService {
     Response doPost(Request request);
 
     Response doDelete(Request request);
+
+    Response doLogin(Request request);
 }
