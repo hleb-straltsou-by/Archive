@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.lang.String?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="324.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gv.archive.gui.controllers.EditController">
+   <children>
+      <HBox prefHeight="21.0" prefWidth="357.0">
+         <children>
+            <Label text="Dossier edit form">
+               <font>
+                  <Font name="Leelawadee Bold" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="15.0" right="20.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <HBox prefHeight="227.0" prefWidth="324.0">
+         <children>
+            <Label text="Role:">
+               <HBox.margin>
+                  <Insets left="15.0" right="15.0" top="13.0" />
+               </HBox.margin>
+            </Label>
+            <ChoiceBox fx:id="roleBox" prefWidth="150.0">
+               <HBox.margin>
+                  <Insets left="37.0" right="10.0" top="10.0" />
+               </HBox.margin>
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="GUEST" />
+                        <String fx:value="USER" />
+                        <String fx:value="ADMIN" />
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="21.0" prefWidth="324.0">
+         <children>
+            <Label text="Login:">
+               <HBox.margin>
+                  <Insets left="15.0" right="20.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="loginForm" prefHeight="25.0" prefWidth="198.0" promptText="input your login">
+               <HBox.margin>
+                  <Insets left="25.0" right="15.0" top="15.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox prefHeight="21.0" prefWidth="324.0">
+         <children>
+            <Label text="Name:">
+               <HBox.margin>
+                  <Insets left="15.0" right="20.0" top="13.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="nameForm" prefHeight="25.0" prefWidth="198.0" promptText="input your full name">
+               <HBox.margin>
+                  <Insets left="23.0" right="15.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox prefHeight="36.0" prefWidth="357.0">
+         <children>
+            <Label text="Country:">
+               <HBox.margin>
+                  <Insets left="15.0" right="10.0" top="13.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="countryForm" prefHeight="25.0" prefWidth="200.0" promptText="input your current country">
+               <HBox.margin>
+                  <Insets left="23.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox prefHeight="36.0" prefWidth="357.0">
+         <children>
+            <Label text="City">
+               <HBox.margin>
+                  <Insets left="15.0" right="10.0" top="13.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="cityForm" prefHeight="25.0" prefWidth="199.0" promptText="input your current city">
+               <HBox.margin>
+                  <Insets left="47.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox prefHeight="36.0" prefWidth="357.0">
+         <children>
+            <Label text="Address">
+               <HBox.margin>
+                  <Insets left="15.0" right="10.0" top="13.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="addressForm" prefHeight="25.0" prefWidth="200.0" promptText="input address">
+               <HBox.margin>
+                  <Insets left="25.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox prefHeight="36.0" prefWidth="357.0">
+         <children>
+            <Label text="Mobile:">
+               <HBox.margin>
+                  <Insets left="15.0" right="10.0" top="13.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="mobileForm" prefHeight="25.0" prefWidth="200.0" promptText="input your mobile phone">
+               <HBox.margin>
+                  <Insets left="28.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox prefHeight="36.0" prefWidth="357.0">
+         <children>
+            <Label text="Skype:">
+               <HBox.margin>
+                  <Insets left="15.0" right="10.0" top="13.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="skypeForm" prefHeight="25.0" prefWidth="200.0" promptText="input your skype login">
+               <HBox.margin>
+                  <Insets left="33.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox prefHeight="85.0" prefWidth="324.0">
+         <children>
+            <Label text="Experience:">
+               <HBox.margin>
+                  <Insets left="15.0" right="10.0" top="13.0" />
+               </HBox.margin>
+            </Label>
+            <TextArea fx:id="experienceForm" prefHeight="11.0" prefWidth="200.0" promptText="information about experience">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="8.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </TextArea>
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <HBox prefHeight="36.0" prefWidth="357.0">
+         <children>
+            <Button fx:id="okButton" mnemonicParsing="false" onAction="#okClicked" prefHeight="25.0" prefWidth="60.0" text="OK">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="92.0" right="30.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelClicked" prefHeight="25.0" prefWidth="61.0" text="Cancel">
+               <HBox.margin>
+                  <Insets bottom="10.0" right="30.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>
