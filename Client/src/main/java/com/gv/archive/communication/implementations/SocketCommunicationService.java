@@ -66,6 +66,17 @@ public class SocketCommunicationService implements CommunicationService{
         return response;
     }
 
+    @Override
+    public Response doLogin(Request request) {
+        request.setRequestType("LOGIN");
+        AppLogger.getLogger().info("Sending LOGIN request to the server.");
+        Response response = sendRequest(request);
+        if(response != null){
+            AppLogger.getLogger().info("Client has been received response from server.");
+        }
+        return response;
+    }
+
     private Response sendRequest(Request request){
         Response response = null;
         try{
