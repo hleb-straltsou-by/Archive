@@ -88,8 +88,8 @@ public class FormController {
     private void forwardToMainPage(User user){
         try {
             currentUser = user;
-            Main.getMainStage().close();
-            Stage stage = new Stage();
+            Stage stage = Main.getMainStage();
+            stage.close();
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/main.fxml"));
             Scene scene = new Scene(root);
             stage.setResizable(true);
@@ -97,6 +97,8 @@ public class FormController {
                     .getResource("pictures/icons/favicon.jpg").toExternalForm()));
             stage.setMinHeight(Main.MIN_HEIGHT_OF_MAIN_WINDOW);
             stage.setMinWidth(Main.MIN_WIDTH_OF_MAIN_WINDOW);
+            stage.setMaxHeight(Main.MAX_HEIGHT_OF_MAIN_WINDOW);
+            stage.setMaxWidth(Main.MAX_WIDTH_OF_MAIN_WINDOW);
             stage.setScene(scene);
             stage.show();
         }catch (IOException e){

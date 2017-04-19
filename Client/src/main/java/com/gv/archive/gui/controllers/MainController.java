@@ -1,7 +1,9 @@
 package com.gv.archive.gui.controllers;
 
+import com.gv.archive.gui.start.Main;
 import com.gv.archive.logging.AppLogger;
 import com.gv.archive.models.Dossier;
+import com.gv.archive.models.Role;
 import com.gv.archive.services.implementations.BasicDossierService;
 import com.gv.archive.services.interfaces.DossierService;
 import javafx.collections.FXCollections;
@@ -13,13 +15,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +59,30 @@ public class MainController {
     @FXML
     private Label experienceInfo;
 
+    @FXML
+    private Label currentUserLabel;
+
+    @FXML
+    private ChoiceBox parserSelectorBox;
+
+    @FXML
+    private Label dossierActionsLabel;
+
+    @FXML
+    private Button addDossierButton;
+
+    @FXML
+    private Button updateDossierButton;
+
+    @FXML
+    private Button deleteDossierButton;
+
+    @FXML
+    private Separator controlPanelSeparator;
+
+    @FXML
+    private Label chooseParserLabel;
+
     private DossierService service = new BasicDossierService();
 
     private final static String DOM_PARSER = "DOM";
@@ -84,6 +110,10 @@ public class MainController {
         }
         dossierPane.setVisible(false);
         dossierHeaderList.setItems(items);
+
+        currentUserLabel.setText(FormController.currentUser.getName());     // init of entered user
+        initVisibleGuiElements(FormController.currentUser.getRole());       // init visible elements according user role
+
         dossierHeaderList.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -165,5 +195,57 @@ public class MainController {
 
     public static void setDossierCash(Dossier dossier){
         cash = dossier;
+    }
+
+    public void logout(ActionEvent actionEvent) {
+        try {
+            Stage stage = Main.getMainStage();
+            stage.close();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/form.fxml"));
+            Scene scene = new Scene(root);
+            stage.setResizable(true);
+            stage.getIcons().add(new Image(getClass().getClassLoader()
+                    .getResource("pictures/icons/favicon.jpg").toExternalForm()));
+            stage.setMinHeight(Main.MIN_HEIGHT_OF_FORM_WINDOW);
+            stage.setMinWidth(Main.MIN_WIDTH_OF_FORM_WINDOW);
+            stage.setMaxHeight(Main.MIN_HEIGHT_OF_FORM_WINDOW);
+            stage.setMaxWidth(Main.MIN_WIDTH_OF_FORM_WINDOW);
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException e){
+            AppLogger.getLogger().error(e.getMessage());
+        }
+    }
+
+    private void initVisibleGuiElements(Role role){
+        switch (role){
+            case ADMIN:
+               parserSelectorBox.setVisible(true);
+               dossierActionsLabel.setVisible(true);
+               addDossierButton.setVisible(true);
+               updateDossierButton.setVisible(true);
+               deleteDossierButton.setVisible(true);
+               controlPanelSeparator.setVisible(true);
+               chooseParserLabel.setVisible(true);
+               break;
+            case USER:
+                parserSelectorBox.setVisible(false);
+                dossierActionsLabel.setVisible(true);
+                addDossierButton.setVisible(false);
+                updateDossierButton.setVisible(true);
+                deleteDossierButton.setVisible(false);
+                controlPanelSeparator.setVisible(false);
+                chooseParserLabel.setVisible(false);
+                break;
+            case GUEST:
+                parserSelectorBox.setVisible(false);
+                dossierActionsLabel.setVisible(false);
+                addDossierButton.setVisible(false);
+                updateDossierButton.setVisible(false);
+                deleteDossierButton.setVisible(false);
+                controlPanelSeparator.setVisible(false);
+                chooseParserLabel.setVisible(false);
+                break;
+        }
     }
 }

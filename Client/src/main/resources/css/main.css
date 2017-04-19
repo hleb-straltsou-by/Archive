@@ -21,3 +21,8 @@
     -fx-border-color: #aef8ff;
     -fx-cell-size: 55px;
 }
+
+.logoutButton{
+    -fx-background-color: #75b375;
+    -fx-background-image: url(../pictures/icons/exit.png);
+}
