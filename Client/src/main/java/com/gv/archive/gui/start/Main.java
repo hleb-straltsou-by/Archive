@@ -16,13 +16,19 @@ public class Main extends Application{
     public static final int MIN_WIDTH_OF_FORM_WINDOW = 600;
 
     /** min size of form window in pixels*/
-    public static final int MIN_HEIGHT_OF_FORM_WINDOW = 354;
+    public static final int MIN_HEIGHT_OF_FORM_WINDOW = 384;
 
     /** min size of main window in pixels*/
     public static final int MIN_WIDTH_OF_MAIN_WINDOW = 887;
 
     /** min size of main window in pixels*/
-    public static final int MIN_HEIGHT_OF_MAIN_WINDOW = 575;
+    public static final int MIN_HEIGHT_OF_MAIN_WINDOW = 600;
+
+    /** max size of main window in pixels*/
+    public static final int MAX_WIDTH_OF_MAIN_WINDOW = 3000;
+
+    /** max size of main window in pixels*/
+    public static final int MAX_HEIGHT_OF_MAIN_WINDOW = 2000;
 
     private static Stage mainStage;
 
