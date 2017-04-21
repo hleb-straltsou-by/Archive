@@ -27,7 +27,7 @@ public class UserValidatorImpl implements UserValidator{
         Request request = new BasicRequest(login + " " + cryptographer.encrypt(password), PARSER_TYPE);
         Response response = service.doLogin(request);
         User user = null;
-        if(!response.getResponseBody().equals("empty")){
+        if(!response.getResponseBody().equals("failed")){
             user = converter.convertXMLStringToUserObject(response.getResponseBody());
         }
         return user;
