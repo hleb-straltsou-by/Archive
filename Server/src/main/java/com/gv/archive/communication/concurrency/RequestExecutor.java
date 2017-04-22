@@ -6,7 +6,6 @@ import com.gv.archive.communication.interfaces.Request;
 import com.gv.archive.communication.interfaces.Response;
 import com.gv.archive.communication.strategies.interfaces.RequestStrategy;
 import com.gv.archive.logging.AppLogger;
-
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.channels.SocketChannel;
