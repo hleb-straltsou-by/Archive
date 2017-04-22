@@ -4,12 +4,15 @@ import com.gv.archive.communication.implementations.BasicResponse;
 import com.gv.archive.communication.interfaces.Request;
 import com.gv.archive.communication.interfaces.Response;
 import com.gv.archive.communication.strategies.interfaces.RequestStrategy;
-import com.gv.archive.xml.parsers.implementations.DomXMLUserParser;
 import com.gv.archive.xml.parsers.interfaces.XMLUserParser;
 
 public class LoginRequestStrategy implements RequestStrategy {
 
-    private XMLUserParser parser = new DomXMLUserParser();
+    private XMLUserParser parser;
+
+    public LoginRequestStrategy(XMLUserParser parser){
+        this.parser = parser;
+    }
 
     @Override
     public Response executeRequest(Request request) {
@@ -20,7 +23,7 @@ public class LoginRequestStrategy implements RequestStrategy {
         String xmlUser = parser.getUser(login, password);
         Response response = new BasicResponse();
         if(xmlUser == null){
-            response.setResponseBody("empty");
+            response.setResponseBody("failed");
         } else {
             response.setResponseBody(xmlUser);
         }

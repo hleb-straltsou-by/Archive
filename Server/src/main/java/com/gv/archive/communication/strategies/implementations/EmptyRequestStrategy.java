@@ -7,6 +7,8 @@ import com.gv.archive.communication.strategies.interfaces.RequestStrategy;
 
 public class EmptyRequestStrategy implements RequestStrategy{
 
+    public EmptyRequestStrategy(){}
+
     @Override
     public Response executeRequest(Request request) {
         return new BasicResponse("failed");
