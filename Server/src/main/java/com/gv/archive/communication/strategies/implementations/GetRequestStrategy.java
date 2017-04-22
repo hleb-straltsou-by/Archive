@@ -4,11 +4,18 @@ import com.gv.archive.communication.implementations.BasicResponse;
 import com.gv.archive.communication.interfaces.Request;
 import com.gv.archive.communication.interfaces.Response;
 import com.gv.archive.communication.strategies.interfaces.RequestStrategy;
+import com.gv.archive.xml.converters.interfaces.XMLDossierConverter;
 import com.gv.archive.xml.parsers.factories.implementations.XMLDossierParserFactoryImpl;
 import com.gv.archive.xml.parsers.factories.interfaces.XMLDossierParserFactory;
 import com.gv.archive.xml.parsers.interfaces.XMLDossierParser;
 
 public class GetRequestStrategy implements RequestStrategy{
+
+    private XMLDossierConverter converter;
+
+    public GetRequestStrategy(XMLDossierConverter converter){
+        this.converter = converter;
+    }
 
     private final static String ALL_DOSSIERS_REQUEST_BODY = "dossiers";
 
