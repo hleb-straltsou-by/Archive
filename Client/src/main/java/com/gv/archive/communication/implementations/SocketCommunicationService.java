@@ -9,6 +9,9 @@ import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.ResourceBundle;
 
+/**
+ * implementation of communicating service using sockets
+ */
 public class SocketCommunicationService implements CommunicationService{
 
     /** object for extracting properties from resource bundle communication.properties */

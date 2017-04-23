@@ -5,10 +5,17 @@ import com.gv.archive.models.Role;
 import com.gv.archive.models.User;
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * Implements XMLUserConverter interface using XStream xml converter
+ */
 public class XStreamXMLUserConverter implements XMLUserConverter {
 
+    /** object for converting */
     private XStream xStream;
 
+    /**
+     * initializes xStream object and processes annotations in models classes
+     */
     public XStreamXMLUserConverter(){
         xStream = new XStream();
         xStream.processAnnotations(User.class);

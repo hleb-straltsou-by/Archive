@@ -30,6 +30,7 @@ public class Main extends Application{
     /** max size of main window in pixels*/
     public static final int MAX_HEIGHT_OF_MAIN_WINDOW = 2000;
 
+    /** main stage of application */
     private static Stage mainStage;
 
     public void start(Stage primaryStage) throws Exception {

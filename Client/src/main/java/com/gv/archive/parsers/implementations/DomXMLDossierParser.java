@@ -26,34 +26,44 @@ import java.util.ResourceBundle;
 
 public class DomXMLDossierParser implements XMLDossierParser {
 
+    /** path to xsd schema*/
     private final static String XSD_SCHEMA_PATH = "data" + File.separator + "schemas" + File.separator + "dossiers.xsd";
 
+    /** path to xml file with dossiers */
     private final static String XML_DOSSIERS_PATH = "data" + File.separator + "xml" + File.separator + "dossiers.xml";
 
     /** object for extracting properties from resource bundle xmlDossiers.properties */
     private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle("xmlDossiers");
 
+    /** name of property in resource bundle */
     private final static String DOSSIERS_HEADER_PROPERTY = "xml.dossiers.header";
 
+    /** name of property in resource bundle */
     private final static String DOSSIERS_END_PROPERTY = "xml.dossiers.end";
 
+    /** for validating xml strings */
     private Validator validator;
 
+    /** for building dom models */
     private DocumentBuilder builder;
 
+    /** for transforming xml file */
     private Transformer transformer;
 
+    /** index of node */
     private final int COUNTRY_NODE_INDEX = 1;
 
+    /** index of node */
     private final int CITY_NODE_INDEX = 3;
 
+    /** index of node */
     private final int STREET_NODE_INDEX = 5;
 
+    /**
+     * initializes components of object
+     */
     public DomXMLDossierParser(){
         try {
-            // parse an XML document into a DOM tree
-            DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-
             // create a SchemaFactory capable of understanding WXS schemas
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             File xsdFile = new File(XSD_SCHEMA_PATH);
@@ -107,15 +117,9 @@ public class DomXMLDossierParser implements XMLDossierParser {
 
     @Override
     public String getDossiers() {
-        String dossiers = null;
         Document document = getDocument(XML_DOSSIERS_PATH);
-        NodeList list = document.getElementsByTagName("dossier");
-        StringBuilder strBuilder = new StringBuilder();
-        for(int i = 0; i < list.getLength(); i++){
-            Element dossier = (Element)list.item(i);
-            strBuilder.append(innerXml(dossier));
-        }
-        return strBuilder.toString();
+        NodeList list = document.getElementsByTagName("dossiers");
+        return innerXml(list.item(0));
     }
 
     @Override
@@ -206,7 +210,7 @@ public class DomXMLDossierParser implements XMLDossierParser {
     @Override
     public boolean deleteDossier(String login) {
         Document document;
-        boolean isDeleted = true;
+        boolean isDeleted = false;
         try{
             document = getDocument(XML_DOSSIERS_PATH);
             NodeList list = document.getElementsByTagName("dossier");
@@ -214,7 +218,8 @@ public class DomXMLDossierParser implements XMLDossierParser {
                 Element dossier = (Element)list.item(i);
                 if(dossier.getAttribute("login").equals(login)){
                     dossier.getParentNode().removeChild(dossier);
-                    i--;        // for deleting all dossiers with such login
+                    i--;        // for deleting all dossiers with such
+                    isDeleted = true;
                 }
             }
             // write changes to xml file
