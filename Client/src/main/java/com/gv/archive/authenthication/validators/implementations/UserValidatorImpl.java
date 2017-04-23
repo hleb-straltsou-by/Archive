@@ -14,12 +14,16 @@ import com.gv.archive.models.User;
 
 public class UserValidatorImpl implements UserValidator{
 
+    /** for communicating with server*/
     private CommunicationService service = new SocketCommunicationService();
 
+    /** for converting xml strings into java objects */
     private XMLUserConverter converter = new XStreamXMLUserConverter();
 
+    /** for encrypting passwords */
     private Cryptographer cryptographer = new CryptographerShift();
 
+    /** used parser on the server */
     private final static String PARSER_TYPE = "DOM";
 
     @Override
