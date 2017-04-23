@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="deleteRequestStrategy" class="com.gv.archive.communication.strategies.implementations.DeleteRequestStrategy"
+          scope="prototype">
+        <constructor-arg ref="XStreamXMLDossierConverter" />
+    </bean>
+
+    <bean id="getRequestStrategy" class="com.gv.archive.communication.strategies.implementations.GetRequestStrategy"
+          scope="prototype">
+        <constructor-arg ref="XStreamXMLDossierConverter" />
+    </bean>
+
+    <bean id="postRequestStrategy" class="com.gv.archive.communication.strategies.implementations.PostRequestStrategy"
+          scope="prototype">
+        <constructor-arg ref="XStreamXMLDossierConverter" />
+    </bean>
+
+    <bean id="putRequestStrategy" class="com.gv.archive.communication.strategies.implementations.PutRequestStrategy"
+          scope="prototype">
+        <constructor-arg ref="XStreamXMLDossierConverter" />
+    </bean>
+
+    <bean id="loginRequestStrategy" class="com.gv.archive.communication.strategies.implementations.LoginRequestStrategy"
+          scope="prototype">
+        <constructor-arg ref="domXMLUserParser" />
+    </bean>
+
+    <bean id="emptyRequestStrategy" class="com.gv.archive.communication.strategies.implementations.EmptyRequestStrategy"
+          scope="prototype">
+    </bean>
+
+    <bean id="XStreamXMLDossierConverter" class="com.gv.archive.xml.converters.implementations.XStreamXMLDossierConverter"
+          scope="prototype" />
+
+    <bean id="domXMLUserParser" class="com.gv.archive.xml.parsers.implementations.DomXMLUserParser"
+          scope="prototype" />
+
+</beans>
