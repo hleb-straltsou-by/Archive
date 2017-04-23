@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<dossiers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/data/schemas/dossiers.xsd">
+    <dossier login="gleb4477" role="ADMIN">
+        <name>Gleb Streltsov</name>
+        <address>
+            <country>Belarus</country>
+            <city>Minsk</city>
+            <street>Prushinskih 47</street>
+        </address>
+        <mobile>+375296949195</mobile>
+        <skype>ka1oken_4by</skype>
+        <experience>I'm a second year student of Belarussian State University of Informatics and Radioelectronics, study in faculty of Computer systems and networks. My passion is to use technology based solutions to solve real world problems and challenges! Now I'm looking for a job in close-knit team specializing in web development.</experience>
+    </dossier>
+    <dossier login="vi4477" role="ADMIN">
+        <name>Veronika Sanko</name>
+        <address>
+            <country>Belarus</country>
+            <city>Minsk</city>
+            <street>Gerasimenko 7</street>
+        </address>
+        <mobile>+375291239671</mobile>
+        <skype>vivi_sanko</skype>
+        <experience>none</experience>
+    </dossier>
+
+
+
+
+
+
+</dossiers>
