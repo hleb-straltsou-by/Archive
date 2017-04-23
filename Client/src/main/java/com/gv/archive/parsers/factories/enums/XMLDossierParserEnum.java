@@ -3,6 +3,9 @@ package com.gv.archive.parsers.factories.enums;
 import com.gv.archive.parsers.implementations.*;
 import com.gv.archive.parsers.interfaces.XMLDossierParser;
 
+/**
+ * defines available parser types for handling data on the server in xml format
+ */
 public enum XMLDossierParserEnum {
 
     DOM{
@@ -31,8 +34,12 @@ public enum XMLDossierParserEnum {
         }
     };
 
+    /** object for defining type of parser */
     XMLDossierParser parser;
 
+    /**
+     * @return parser object according parser type
+     */
     public XMLDossierParser getCurrentParserType(){
         return parser;
     }

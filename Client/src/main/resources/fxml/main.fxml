@@ -202,12 +202,11 @@
                      </children>
                   </VBox>
                   <Separator layoutX="13.0" layoutY="242.0" prefHeight="17.0" prefWidth="481.0" />
-                  <Label fx:id="experienceInfo" alignment="TOP_LEFT" layoutX="122.0" layoutY="259.0" prefHeight="192.0" prefWidth="370.0" text="experience">
+                  <Separator layoutX="6.0" layoutY="451.0" prefHeight="10.0" prefWidth="481.0" />
+                  <Label fx:id="experienceInfo" alignment="TOP_LEFT" layoutX="122.0" layoutY="259.0" prefHeight="181.0" prefWidth="353.0" text="experience" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="259.0">
                      <font>
                         <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Separator layoutX="6.0" layoutY="451.0" prefHeight="10.0" prefWidth="481.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
          </children>

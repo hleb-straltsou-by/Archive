@@ -2,15 +2,21 @@ package com.gv.archive.xml.models;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+/**
+ * represents address model
+ */
 public class Address{
 
     @XStreamAlias("country")
+    /** country property */
     private String country;
 
     @XStreamAlias("city")
+    /** city property */
     private String city;
 
     @XStreamAlias("street")
+    /** street property */
     private String street;
 
     public String getCountry() {

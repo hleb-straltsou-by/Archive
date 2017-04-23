@@ -1,10 +1,10 @@
-package com.gv.archive.converters.interfaces;
+package com.gv.archive.xml.converters.interfaces;
 
-import com.gv.archive.models.User;
+import com.gv.archive.xml.models.User;
 
 /**
  * defines contract for converting model user to xml string and vice versa
- * @see com.gv.archive.models.User
+ * @see com.gv.archive.xml.models.User
  */
 public interface XMLUserConverter {
 

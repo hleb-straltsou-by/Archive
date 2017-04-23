@@ -1,10 +1,12 @@
 package com.gv.archive.gui.controllers;
 
 import com.gv.archive.models.Dossier;
+import com.gv.archive.models.Role;
+import com.gv.archive.services.implementations.BasicDossierService;
+import com.gv.archive.services.interfaces.DossierService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -39,13 +41,11 @@ public class EditController {
     @FXML
     private TextArea experienceForm;
 
-    @FXML
-    private Button okButton;
-
-    @FXML
-    private Button cancelButton;
+    private DossierService service = new BasicDossierService();
 
     private static final Dossier EMPTY_DOSSIER = null;
+
+    private final static String DOM_PARSER = "DOM";
 
     @FXML
     private void initialize(){
@@ -74,7 +74,13 @@ public class EditController {
        dossier.setMobile(mobileForm.getText());
        dossier.setSkype(skypeForm.getText());
        dossier.setExperience(experienceForm.getText());
-       MainController.setDossierCash(dossier);
+       dossier.setRole(Role.valueOf(roleBox.getSelectionModel().getSelectedItem().toString()));
+
+       if(MainController.getDossierCash() == null){
+           service.addDossier(dossier, DOM_PARSER);
+       } else {
+           service.updateDossier(MainController.getDossierCash().getLogin(), dossier, DOM_PARSER);
+       }
 
        Node source = (Node)actionEvent.getSource();
        Stage stage = (Stage)source.getScene().getWindow();
@@ -82,7 +88,6 @@ public class EditController {
     }
 
     public void cancelClicked(ActionEvent actionEvent){
-        MainController.setDossierCash(EMPTY_DOSSIER);
         Node source = (Node)actionEvent.getSource();
         Stage stage = (Stage)source.getScene().getWindow();
         stage.close();

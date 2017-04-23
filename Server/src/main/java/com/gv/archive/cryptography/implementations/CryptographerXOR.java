@@ -33,6 +33,3 @@ public class CryptographerXOR implements Cryptographer {
         return encrypt(str);
     }
 }
-
-
-
