@@ -6,8 +6,11 @@ import com.gv.archive.models.Dossier;
 import com.gv.archive.models.Role;
 import com.gv.archive.services.implementations.BasicDossierService;
 import com.gv.archive.services.interfaces.DossierService;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,14 +26,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MainController {
-
-    @FXML
-    private ListView<String> dossierHeaderList;
 
     @FXML
     private AnchorPane dossierPane;
@@ -83,11 +80,14 @@ public class MainController {
     @FXML
     private Label chooseParserLabel;
 
+    @FXML
+    private ListView<String> dossierHeaderList;
+
+    private ObservableMap<String, Dossier> dossierMap;
+
     private DossierService service = new BasicDossierService();
 
     private final static String DOM_PARSER = "DOM";
-
-    private Map<String, Dossier> dossierMap;
 
     private static Dossier cash = null;
 
@@ -99,15 +99,11 @@ public class MainController {
      * also method initialize dossiers from server
      */
     private void initialize(){
-        List<Dossier> dossiers = service.getAllDossiers(DOM_PARSER);
-        dossierMap = new HashMap<>(dossiers.size());
+        dossierMap = service.getAllDossiers(DOM_PARSER);
         ObservableList<String> items = FXCollections.observableArrayList();
-        for(Dossier dossier: dossiers){
-            String dossierHeader = dossier.getName() + "\n" + dossier.getAddress().getCountry()
-                    + ", " + dossier.getAddress().getCity() + "\n";
-            items.add(dossierHeader);
-            dossierMap.put(dossierHeader, dossier);
-        }
+        items.addAll(dossierMap.keySet());
+        dossierHeaderList.setItems(items);
+
         dossierPane.setVisible(false);
         dossierHeaderList.setItems(items);
 
@@ -128,8 +124,36 @@ public class MainController {
                 mobileInfo.setText(dossier.getMobile());
                 skypeInfo.setText(dossier.getSkype());
                 experienceInfo.setText(dossier.getExperience());
+                experienceInfo.setWrapText(true);
             }
         });
+
+        initiateContentUpdater();
+    }
+
+    private void initiateContentUpdater() {
+        Task task = new Task<Void>() {
+            @Override
+            public Void call() throws Exception {
+                int i = 0;
+                while (true) {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            dossierMap = service.getAllDossiers(DOM_PARSER);
+                            dossierHeaderList.getItems().clear();
+                            for(String key : dossierMap.keySet()){
+                                dossierHeaderList.getItems().add(key);
+                            }
+                        }
+                    });
+                    Thread.sleep(2000);
+                }
+            }
+        };
+        Thread th = new Thread(task);
+        th.setDaemon(true);
+        th.start();
     }
 
     public void updateCurrentDossier(ActionEvent actionEvent) {
@@ -139,30 +163,11 @@ public class MainController {
         }
         setDossierCash(dossierMap.get(oldDossierHeader));
         callEditWindow(actionEvent);
-        Dossier dossier = getDossierCash();
-        if(dossier != null) {
-            String newDossierHeader = dossier.getName() + "\n" + dossier.getAddress().getCountry()
-                    + ", " + dossier.getAddress().getCity() + "\n";
-            dossierHeaderList.getItems().remove(oldDossierHeader);
-            dossierHeaderList.getItems().add(newDossierHeader);
-            String oldDossierLogin = dossierMap.get(oldDossierHeader).getLogin();
-            dossierMap.remove(oldDossierHeader);
-            dossierMap.put(newDossierHeader, dossier);
-            service.updateDossier(oldDossierLogin, dossier, DOM_PARSER);
-        }
     }
 
     public void createDossier(ActionEvent actionEvent) {
         setDossierCash(EMPTY_DOSSIER);
         callEditWindow(actionEvent);
-        Dossier dossier = getDossierCash();
-        if(dossier != null) {
-            String dossierHeader = dossier.getName() + "\n" + dossier.getAddress().getCountry()
-                    + ", " + dossier.getAddress().getCity() + "\n";
-            dossierHeaderList.getItems().add(dossierHeader);
-            dossierMap.put(dossierHeader, dossier);
-            service.addDossier(dossier, DOM_PARSER);
-        }
     }
 
     private void callEditWindow(ActionEvent actionEvent) {
@@ -185,8 +190,6 @@ public class MainController {
         String selectedDossierHeader = dossierHeaderList.getSelectionModel().getSelectedItem();
         String login = dossierMap.get(selectedDossierHeader).getLogin();
         service.deleteDossier(login, DOM_PARSER);
-        dossierMap.remove(selectedDossierHeader);
-        dossierHeaderList.getItems().remove(selectedDossierHeader);
     }
 
     public static Dossier getDossierCash(){

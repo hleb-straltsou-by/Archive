@@ -3,7 +3,6 @@ package com.gv.archive.cryptography.implementations;
 import com.gv.archive.cryptography.interfaces.Cryptographer;
 import java.util.ResourceBundle;
 
-// TODO: add to Spring IoC container
 /**
  * implements Cryptographer interface according XOR crypt algorithm
  */
