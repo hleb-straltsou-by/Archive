@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
  */
 public class AppLogger {
 
-    /** logger object from log4j library*/
+    /** logger object from log4j library */
     private static final Logger log = Logger.getLogger(AppLogger.class);
 
     /**
