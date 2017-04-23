@@ -3,13 +3,14 @@ package com.gv.archive.communication.strategies.implementations;
 import com.gv.archive.communication.interfaces.Request;
 import com.gv.archive.communication.interfaces.Response;
 import com.gv.archive.communication.strategies.interfaces.RequestStrategy;
+import com.gv.archive.xml.converters.implementations.XStreamXMLDossierConverter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 public class PostRequestStrategyTest extends Mockito{
 
-    private RequestStrategy strategy = new PostRequestStrategy();
+    private RequestStrategy strategy = new PostRequestStrategy(new XStreamXMLDossierConverter());
 
     @Test
     public void executeRequestWithDomParser() throws Exception {
@@ -29,6 +30,20 @@ public class PostRequestStrategyTest extends Mockito{
         when(request.getXMLParser()).thenReturn("DOM");
 
         Response response = strategy.executeRequest(request);
+        verify(request).getRequestBody();
+        verify(request).getXMLParser();
+
+        Assert.assertEquals(response.getResponseBody(), "succeed");
+
+        // delete test data
+        request = mock(Request.class);
+
+        when(request.getRequestBody()).thenReturn("test44");
+        when(request.getXMLParser()).thenReturn("DOM");
+
+        strategy = new DeleteRequestStrategy(new XStreamXMLDossierConverter());
+
+        response = strategy.executeRequest(request);
         verify(request).getRequestBody();
         verify(request).getXMLParser();
 

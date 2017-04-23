@@ -3,13 +3,14 @@ package com.gv.archive.communication.strategies.implementations;
 import com.gv.archive.communication.interfaces.Request;
 import com.gv.archive.communication.interfaces.Response;
 import com.gv.archive.communication.strategies.interfaces.RequestStrategy;
+import com.gv.archive.xml.converters.implementations.XStreamXMLDossierConverter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 public class PutRequestStrategyTest extends Mockito{
 
-    private RequestStrategy strategy = new PutRequestStrategy();
+    private RequestStrategy strategy = new PutRequestStrategy(new XStreamXMLDossierConverter());
 
     @Test
     public void executeRequestWithDomParser() throws Exception {
