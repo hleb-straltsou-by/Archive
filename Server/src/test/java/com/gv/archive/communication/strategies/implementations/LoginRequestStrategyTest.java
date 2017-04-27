@@ -21,7 +21,7 @@ public class LoginRequestStrategyTest extends Mockito{
     XMLUserConverter converter = new XStreamXMLUserConverter();
 
     @Test
-    public void executeRequest() throws Exception {
+    public void executeLoginRequestWithExistedUserTest() throws Exception {
         Request request = mock(Request.class);
 
         String requestBodyStr = "vi4477 5588";

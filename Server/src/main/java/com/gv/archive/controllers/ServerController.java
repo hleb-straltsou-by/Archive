@@ -1,7 +1,11 @@
 package com.gv.archive.controllers;
 
+import com.gv.archive.communication.concurrency.RMIServer;
 import com.gv.archive.communication.concurrency.RequestExecutor;
 import com.gv.archive.logging.AppLogger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.ServerSocketChannel;
@@ -30,6 +34,11 @@ public class ServerController {
     /** pool of request executors threads */
     private final static ExecutorService EXECUTOR_SERVICE = Executors.newFixedThreadPool(POOL_SIZE);
 
+    private static ApplicationContext context = new ClassPathXmlApplicationContext("IoC/rmi-context.xml");
+
+    /** bean name */
+    private final static String RMI_SERVER_BEAN = "rmiServer";
+
     /**
      * entry point of application, starts server
      */
@@ -42,6 +51,12 @@ public class ServerController {
             int port = Integer.parseInt(RESOURCE_BUNDLE.getString(SERVER_PORT));
             serverSocketChannel.socket().bind(new InetSocketAddress(port));
             AppLogger.getLogger().info("Server started.");
+
+            // lunch rmi server for remote rest server
+            RMIServer server = (RMIServer) context.getBean(RMI_SERVER_BEAN);
+            Thread thread = new Thread(server);
+            thread.start();
+
             while(true){
                 SocketChannel socketChannel = serverSocketChannel.accept();
                 AppLogger.getLogger().info("Got a request from client.");

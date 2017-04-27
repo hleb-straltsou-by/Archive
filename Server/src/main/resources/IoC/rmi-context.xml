@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="rmiServer" class="com.gv.archive.communication.concurrency.RMIServer" scope="singleton">
+        <constructor-arg ref="remoteDossierService" />
+    </bean>
+
+    <bean id="remoteDossierService" class="com.gv.archive.communication.rmi.implementations.RemoteDossierServiceImpl"
+          scope="singleton">
+        <constructor-arg ref="domXmlDossierParser" />
+        <constructor-arg ref="xStreamXmlDossierConverter" />
+    </bean>
+
+    <bean id="domXmlDossierParser" class="com.gv.archive.xml.parsers.implementations.DomXMLDossierParser"
+        scope="prototype">
+    </bean>
+
+    <bean id="xStreamXmlDossierConverter" class="com.gv.archive.xml.converters.implementations.XStreamXMLDossierConverter"
+        scope="prototype">
+    </bean>
+
+</beans>
