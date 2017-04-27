@@ -7,7 +7,7 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 /**
  * represents address model
  */
-public class Dossier {
+public class Dossier{
 
     @XStreamAlias("login")
     @XStreamAsAttribute

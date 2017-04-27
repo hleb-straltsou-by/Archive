@@ -5,7 +5,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 /**
  * represents address model
  */
-public class Address{
+public class Address {
 
     @XStreamAlias("country")
     /** country property */
