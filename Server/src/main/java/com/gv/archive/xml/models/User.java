@@ -2,13 +2,11 @@ package com.gv.archive.xml.models;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-import java.io.Serializable;
-
 /**
  * specifies properties of user in authentication system
  */
 @XStreamAlias("user")
-public class User implements Serializable {
+public class User {
 
     /**
      * property - login of user
