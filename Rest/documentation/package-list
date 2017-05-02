@@ -1,0 +1,7 @@
+com.gv.archive
+com.gv.archive.communication.rmi.interfaces
+com.gv.archive.controllers
+com.gv.archive.converters.implementations
+com.gv.archive.converters.interfaces
+com.gv.archive.logging
+com.gv.archive.models

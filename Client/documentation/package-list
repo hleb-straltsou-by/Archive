@@ -1,0 +1,16 @@
+com.gv.archive.authenthication.validators.implementations
+com.gv.archive.authenthication.validators.interfaces
+com.gv.archive.communication.implementations
+com.gv.archive.communication.interfaces
+com.gv.archive.converters.implementations
+com.gv.archive.converters.interfaces
+com.gv.archive.cryptography.implementations
+com.gv.archive.cryptography.interfaces
+com.gv.archive.gui.controllers
+com.gv.archive.gui.start
+com.gv.archive.logging
+com.gv.archive.models
+com.gv.archive.serialization.implementations
+com.gv.archive.serialization.interfaces
+com.gv.archive.services.implementations
+com.gv.archive.services.interfaces
