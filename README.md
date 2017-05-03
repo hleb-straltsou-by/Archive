@@ -1,5 +1,6 @@
 # Archive
-Task:
+This app is designed to provide access to the archive with dossiers using client-server architecture and and also providing REST interface. 
+# Task:
 
 - create a client-server application "Archive";
 - archive is a catalog of personal files per person (fio, contact
